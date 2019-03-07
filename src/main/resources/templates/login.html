@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Nevados de Chillán</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/fonts/typicons.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
+</head>
+
+<body style="background-color: rgb(0,78,100);">
+	<!-- barra de navegación simple, para registrarse, solo tiene el index e iniciar sesión -->
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+        <!-- espacio solo para el Nevados de Chillan-->
+        <div class="container"><a class="navbar-brand" href="login.html" style="font-size: 30px;">Nevados de Chillán</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"></button>
+            <!--  <div class="collapse navbar-collapse" id="navcol-1">
+                botón iniciar sesión 
+                <ul class="nav navbar-nav mr-auto"></ul><span class="navbar-text actions"> <a class="btn btn-primary btn-lg action-button" role="button" href="index.html">Regístrate!</a></span></div>
+                -->
+        </div>
+    </nav>
+    <!-- campo para el inicio de sesión -->
+    <div class="login-card"><img src="assets/img/avatar_2x.png" class="profile-img-card">
+        <form action="authenticate" th:action="@{/authenticate}" th:object="${caja}" class="form-signin" method="post">
+          <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+    				<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>    
+		  </div>
+          <input class="form-control" type="email" th:field="*{correo}" name="emailLogIn" required placeholder="correo electrónico" autofocus id="inputEmail">
+          <input class="form-control" type="password" th:field="*{password}" name="passLogIn" required placeholder="contraseña" id="inputPassword">
+          <button class="btn btn-primary btn-lg text-white submit-button" type="submit">Ingresar</button>
+       </form>
+    </div>
+    
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script src="assets/js/script.min.js"></script>
+</body>
+
+</html>

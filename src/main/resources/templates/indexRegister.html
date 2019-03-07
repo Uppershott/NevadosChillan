@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Nevados de Chillán</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/fonts/typicons.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
+    <head th:replace="layout/header :: head">
+</head>
+
+<body style="background-color: rgb(0,78,100);">
+	<header th:replace="layout/header :: header"></header>
+    <!-- barra de navegación simple, para registrarse, solo tiene el index e iniciar sesión
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+        espacio solo para el Nevados de Chillan
+        <div class="container"><a class="navbar-brand" href="addAttribute.html" style="font-size: 30px;">Nevados de Chillán</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"></button>
+            
+        </div>
+    </nav>
+
+     body del index, aquí sale el formulario para registrarse -->
+    <div class="text-justify m-auto" style="width: 800px;height:750;">
+            
+            <div class="article-list" style="background-color: #004e64;">
+        		<div class="container" >
+                    <!-- recién aquí entra el formulario -->
+                    <div class="list" style="background-color: #ffffff; text-align:center; width:505px;">
+                            <!-- FORMULARIO -->
+                            <form action="cargarUsuario" th:action="@{cargarUsuario}" th:object="${usuario}"method="post" class="custom-form">
+                            	<select th:field="*{id}">
+		                        	<option value="0"> Si ya te has registrado antes </option>
+			                    	<option th:each="us: ${myUsuarioList}"
+				                            th:value="${us.id}"
+				                            th:text="${us.nombre}"/>
+				                </select>
+				                <button style="padding:5px;" class="btn" type="submit">Cargar</button>
+                            </form>
+                            <h3>ó</h3>
+                            <form action="register" th:action="@{/register}" th:object="${usuario}" method="post" class="custom-form" style="padding: 0px;margin: 15px;height: 440px;width: 390px;">
+                                <!-- título -->
+                                <h2 style="padding:0;">Regístrate!</h2>
+                                <div class="form-row form-group">
+                                    <div class="col-sm-4 label-column"><label class="col-form-label" for="run-input-field">Rut</label></div>
+                                    <div class="col-sm-6 input-column"><input class="form-control" type="text" th:field="*{rut}" name="rutUserIndex" required pattern="\d{1,2}(\.|\s| |-|)\d{3}(\.|\s| |-|)\d{3}(\.|-| |)(\d{1}|[kK])"></div>
+                                </div>
+                                <div class="form-row form-group">
+                                    <div class="col-sm-4 label-column"><label class="col-form-label" for="name-input-field">Nombre</label></div>
+                                    <div class="col-sm-6 input-column"><input class="form-control" type="text" th:field="*{nombre}" name="nameUserIndex" required maxlength="25"></div>
+                                </div>
+                                <div class="form-row form-group">
+                                    <div class="col-sm-4 label-column"><label class="col-form-label" for="name-input-field">Apellido</label></div>
+                                    <div class="col-sm-6 input-column"><input class="form-control" type="text" th:field="*{apellido}" name="lastnameUserIndex" required maxlength="25"></div>
+                                </div>
+                                <div class="form-row form-group">
+                                    <div class="col-sm-4 label-column"><label class="col-form-label" for="phone-input-field">Teléfono</label></div>
+                                    <div class="col-sm-6 input-column"><input class="form-control" type="tel" th:field="*{telefono}" name="telefonoUserIndex" placeholder="Número de 8 dígitos" required pattern="[0-9]{8}" maxlength="8"></div>
+                                </div>
+                                <div class="form-row form-group">
+                                    <div class="col-sm-4 label-column"><label class="col-form-label" for="email-input-field">Correo electrónico</label></div>
+                                    <div class="col-sm-6 input-column"><input class="form-control" type="email" th:field="*{correo}" name="emailUserIndex" placeholder="abc@nevadosdechillan.com" required></div>
+                                </div>
+                                <div class="form-row">
+                                	<div class="col-sm-9 submit-column">
+                                	<button style="padding:5px;" class="btn btn-primary btn-lg text-white submit-button" type="submit">Guardar</button>
+                           			
+                           			<button style="padding:5px;" class="btn" type="button" onClick="history.back()">Volver</button>
+                           			</div>
+                           		</div>
+                            </form>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script src="assets/js/script.min.js"></script>
+</body>
+
+</html>

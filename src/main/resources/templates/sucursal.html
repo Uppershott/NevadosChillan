@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<title>Nevados de Chillán</title>
+	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+	<link rel="stylesheet" href="assets/fonts/typicons.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+	<link rel="stylesheet" href="assets/css/styles.min.css">
+	<head th:replace="layout/header :: head">
+</head>
+
+<body style="background-color: #004e64;">
+	<header th:replace="layout/header :: header"></header>
+	<div class="container" style="background-color: #004e64;">
+		<div class="col-md-8 offset-md-2" style="background-color: #ffffff;">
+			<h1>Agregar Sucursal</h1>
+			<div class="table-responsive" style="background-color: #ffffff;">
+				<form action="addSucursal" th:action="@{/addSucursal}" th:object="${sucursal}" method="post" class="custom-form">
+					<div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+    					<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>    
+		 			</div>
+					<div class="form-row form-group">
+                      	<div class="col-sm-4 label-column"><label class="col-form-label" for="name-input-field">Nombre</label></div>
+                      	<div class="col-sm-6 input-column"><input class="form-control" type="text" th:field="*{nombre}" name="nameAddSucursal" ></div>
+	                </div>
+	                <div class="form-row form-group">
+                      	<div class="col-sm-4 label-column"><label class="col-form-label" for="name-input-field">Dirección</label></div>
+                      	<div class="col-sm-6 input-column"><input class="form-control" type="text" th:field="*{direccion}" name="directionAddSucursal" required maxlength="25"></div>
+                  	</div>
+                  	<div class="form-row form-group">
+                    	<div class="col-sm-4 label-column"><label class="col-form-label" for="tel-input-field">Teléfono</label></div>
+                    	<div class="col-sm-6 input-column"><input class="form-control" type="tel" th:field="*{telefono}" name="telAddSucursal" required></div>
+	              	</div>
+	                <div>
+                       	<button class="btn btn-primary btn-lg text-white submit-button" type="submit">Agregar</button><button class="btn btn-primary btn-lg text-white back-button" type="button" onClick="history.back()">Volver</button>
+                    </div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

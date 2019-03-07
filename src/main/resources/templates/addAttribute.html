@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<title>Nevados de Chillán</title>
+	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+	<link rel="stylesheet" href="assets/fonts/typicons.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+	<link rel="stylesheet" href="assets/css/styles.min.css">
+	<head th:replace="layout/header :: head">
+</head>
+
+<body style="background-color: #004e64;">
+	<header th:replace="layout/header :: header"></header>
+	<div class="container" style="background-color: #004e64;">
+	<div class="tab">
+		<div class="col-md-8 offset-md-2" style="background-color: #ffffff; ">
+			<h1>Gestionar Atributos</h1>
+			<div style="margin:5;">
+			
+				<table class="table" id="buttons" style="text-align:center;"> 
+		            <thead>
+		            	<tr>
+		            		<th><form action="caja" th:action="@{/caja}"	class="custom-form">
+	          						<button class="btn" type="submit">Caja</button></form>
+	          					</th>
+		                    <th><form action="product" th:action="@{/product}"	class="custom-form">
+	          						<button class="btn" type="submit">Producto</button></form>
+	          					</th>
+		                    <th><form action="sucursal" th:action="@{/sucursal}" class="custom-form">
+	       						<button class="btn" type="submit">Sucursal</button></form>
+	       					</th>
+	      						<th><form action="tipoVoucher" th:action="@{/tipoVoucher}" class="custom-form">
+	        					<button class="btn" type="submit">Tipo de Voucher!</button></form>
+	        				</th>
+		                </tr>
+		            </thead>
+              	</table>		        
+			
+			<!--Lista de Cajas-->
+			<button class="btn" data-toggle="collapse" data-target="#cajas">Lista Cajas</button>
+			<div id="cajas" class="collapse">
+				<div class="row tabla-3columnas" style="background-color: #ffffff;">
+					<div class="table-responsive" style="background-color: #ffffff;">
+						<h3 style="height: 31px;margin: 23px;">Lista de Cajas</h3>
+						<table class="table" id="cajaList"> 
+				            <thead>
+				            	<tr>
+				                	<th>Correo</th>
+				                    <th>Password</th>
+				                    <th>Sucursal</th>
+				                </tr>
+				            </thead>
+				            <tbody>
+				                <tr th:each="caj: ${myCajaList}">
+				                    <td th:text="${caj.correo}"/>
+				                    <td th:text="${caj.password}"/>
+				                    <td th:text="${caj.sucursal.nombre}"/>
+				                </tr>
+				        	</tbody>
+	                	</table>
+				    </div>
+				</div>
+			</div>
+			
+			<!--Lista de Productos-->
+			<button class="btn" data-toggle="collapse" data-target="#productos">Lista de Productos</button>
+			<div id="productos" class="collapse">
+				<div class="row tabla-3columnas" style="background-color: #ffffff;">
+					<div class="table-responsive" style="background-color: #ffffff;">
+				        <h3 style="height: 31px;margin: 23px;">Lista de Productos</h3>
+				        <table class="table" id="productList"> 
+				            <thead>
+				                <tr>
+				                    <th>Nombre</th>
+				                    <th>Descripción</th>
+				                    <th></th>
+				                </tr>
+				            </thead>
+				            <tbody>
+				                <tr th:each="prod: ${myProductoList}">
+				                    <td th:text="${prod.nombre}"/>
+				                    <td th:text="${prod.descripcion}"/>
+				                    <td></td>
+				                </tr>
+				        	</tbody>
+		               	</table>
+				    </div>
+				</div>
+			</div>
+			    
+			<!--Lista de Sucursales-->
+			<button class="btn" data-toggle="collapse" data-target="#sucursales">Lista de Sucursales</button>
+			<div id="sucursales" class="collapse">
+				<div class="row tabla-3columnas" style="background-color: #ffffff;">
+					<div class="table-responsive" style="background-color: #ffffff;">
+				        <h3 style="height: 31px;margin: 23px;">Lista de Sucursales</h3>
+				        <table class="table" id="sucursalesList">
+				            <thead>
+				                <tr>
+				                    <th>Nombre</th>
+				                    <th>Dirección</th>
+				                    <th>telefono</th>
+				                </tr>
+				            </thead>
+				            <tbody>
+				                <tr th:each="suc: ${mySucursalList}">
+				                    <td th:text="${suc.nombre}"/>
+				                    <td th:text="${suc.direccion}"/>
+				                    <td th:text="${suc.telefono}"/>
+				                </tr>
+				            </tbody>
+				        </table>
+				    </div>
+				  </div>
+			  </div>
+			   
+			<!--Lista de Tipos de Voucher--> 
+			<button class="btn" data-toggle="collapse" data-target="#tipos">Lista Tipos Voucher</button>
+			<div id="tipos" class="collapse">
+				<div class="row tabla-3columnas" style="background-color: #ffffff;">
+					<div class="table-responsive" style="background-color: #ffffff;">
+				        <h3 style="height: 31px;margin: 23px;">Lista de Tipos de Voucher</h3>
+				        <table class="table" id="tipoVoucherList"> 
+				            <thead>
+				                <tr>
+				                    <th>Nombre</th>
+				                    <th>Descripción</th>
+				                    <th></th>
+				                </tr>
+				            </thead>
+				            <tbody>
+				                <tr th:each="tiVo: ${myTipoVoucherList}">
+				                    <td th:text="${tiVo.nombre}"/>
+				                    <td th:text="${tiVo.descripcion}"/>
+				                </tr>
+				                <!-- <tr>
+				                	<td><input type="text" th:field="*{nombre}"></td>
+				                	<td><input type="text" th:field="*{descripcion}"></td>
+				                	<td><form action="addTipoVoucher" th:action="@{/addTipoVoucher}" th:object="${tipoVoucher}" method="post" class="custom-form"><button type="submit">Agregar</button></form></td>
+				                </tr>-->
+				            </tbody>
+				        </table>
+				 	 </div>
+				 </div>
+			</div>
+			
+			<!--Lista de Convenios-->
+			<button class="btn" data-toggle="collapse" data-target="#convenios">Lista de Convenios</button>
+			<div id="convenios" class="collapse">
+				<div class="row tabla-3columnas" style="background-color: #ffffff;">
+					<div class="table-responsive" style="background-color: #ffffff;">
+				        <h3 style="height: 31px;margin: 23px;">Lista de Usuarios</h3>
+				        <table class="table" id="convenioList">
+				            <thead>
+				                <tr>
+				                	<th>Rut</th>
+				                    <th>Nombre</th>
+				                    <th>Apellido</th>
+				                    <th>Telefono</th>
+				                    <th>Correo</th>
+				                    <th>Fecha Registro</th>
+				                </tr>
+				            </thead>
+				            <tbody>
+				                <tr th:each="usuCon: ${myConvenioList}">
+				                    <td th:text="${usuCon.rut}"/>
+				                    <td th:text="${usuCon.nombre}"/>
+				                    <td th:text="${usuCon.apellido}"/>
+				                    <td th:text="${sucCon.telefono}"/>
+				                    <td th:text="${usuCon.correo}"/>
+				                    <td th:text="${usuCon.fechaRegistro}"/>
+				                </tr>
+				            </tbody>
+				        </table>
+				    </div>
+				  </div>
+			  </div>
+			  
+			  
+			</div>
+		</div>
+	  </div>
+	</div>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+	<script src="assets/js/script.min.js"></script>
+</body>
+</html>

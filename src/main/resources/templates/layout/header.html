@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+<meta charset="UTF-8">
+<title>Nevados de Chillán</title>
+</head>
+<body>
+	<header th:fragment="header">
+		<nav
+			class="navbar navbar-light navbar-expand-md navigation-clean-search"
+			style="background-color: #ffffff;">
+			<div class="container">
+				<a class="navbar-brand" href="addAttribute.html"
+					style="background-color: #ffffff;">Nevados de Chillán</a>
+				<button class="navbar-toggler" data-toggle="collapse"
+					data-target="#navcol-1" style="background-color: #ffffff;">
+					<span class="sr-only">Toggle navigation</span><span
+						class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navcol-1"
+					style="background-color: #ffffff;">
+					
+					<ul class="nav navbar-nav ml-auto">
+						<li>
+						<a target="_blank" style="margin: 2px;"><span th:text="${session.usuario.nombre} + ' '+${session.usuario.apellido}"
+								th:unless="${session.usuario.nombre == null}"></span></a>
+							 <!--<div class="dropdown-menu hide" role="menu">
+								<a class="dropdown-item" role="presentation"
+									th:href="@{/profile?rut=__${session.usuario.rut}__}">Mi
+									perfil</a><a class="dropdown-item" role="presentation"
+									href="addProject.html">Agregar proyecto</a><a
+									class="dropdown-item" role="presentation"
+									href="editProfile.html">Modificar perfil</a> <a
+									class="dropdown-item" role="presentation"
+									href="myProjects.html">Mis proyectos</a><a
+									class="dropdown-item" role="presentation" href="myPosts.html">Mis
+									postulaciones</a>
+							</div>--> 
+						</li> 
+					</ul>
+					<form action="logout" th:action="@{/logout}">
+					<button type="submit" class="btn btn-primary submit-button" 
+						style="background-color: rgb(0, 78, 100);">Cerrar Sesión</button>
+						</form>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+</body>
+</html>

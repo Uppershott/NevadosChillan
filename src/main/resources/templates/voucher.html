@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Nevados de Chillán</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/fonts/typicons.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
+    <head th:replace="layout/header :: head">
+</head>
+
+<body style="background-color: #004e64;">
+	<header th:replace="layout/header :: header"></header>
+    <div class="article-list" style="background-color: #004e64;">
+        <div class="container">
+            <div class="titulo-index">
+                <h2 class="text-center" style="color: rgb(255,255,255); padding:0;">Vouchers</h2>
+            </div>
+            <div class="row tabla-2columnas" style="background-color: #ffffff;">
+                <div class="col-sm-9 col-md-6 text-center columna1-agrVoucher"><i class="icon ion-document-text" style="width: 84px;height: 6px;margin: 0px;font-size: 52px;"></i>
+                    <h3 class="text-center name" style="font-size: 20px;margin-bottom: 18px;margin-top: 4px;">Voucher</h3>
+                    <form action="generateVoucher" th:action="@{/generateVoucher}" th:object="${voucher}" 
+                    	method="post" class="custom-form" style="padding: 0px;margin: 24px;height: 280px;width: 390px;"> 		
+	                    <div class="form-row form-group">
+                           	<div class="col-sm-4 label-column">
+                           		<label class="col-form-label" for="producto-select">Producto</label>
+                           	</div>
+                           	<div class="col-sm-6 select-column">
+                           		<select th:field="*{productoId}">
+			                       	<option value="" disabled selected> Selecciona un producto</option>
+			                    	<option th:each="prod: ${myProductoList}"
+				                            th:value="${prod.id}"
+				                            th:text="${prod.nombre}"/>
+		                 		</select>
+                 			</div>
+                        </div>
+	                    <div class="form-row form-group">
+                           	<div class="col-sm-4 label-column">
+                           		<label class="col-form-label">Tipo de Voucher</label>
+                       		</div>
+                           	<div class="col-sm-6 select-column">
+                           		<select th:field="*{tipovoucherId}">
+			                       	<option value="" disabled selected> Selecciona un tipo</option>
+			                    	<option th:each="tiVo: ${myTipoVoucherList}"
+				                            th:value="${tiVo.id}"
+				                            th:text="${tiVo.nombre}"/>
+		                 		</select>
+                 			</div>
+                        </div>
+	                    <div class="form-row form-group">
+                           	<div class="col-sm-4 label-column"><label class="col-form-label">Beneficiario</label></div>
+                           	<div class="col-sm-6 select-column">
+                           		<select th:field="*{usuarioBeneficiario}">
+			                       	<option value="" disabled selected> Selecciona un Beneficiario</option>
+			                    	<option th:each="usu: ${myUsuarioList}"
+				                            th:value="${usu.id}"
+				                            th:text="${usu.nombre}"/>
+		                 		</select>
+                 			</div>
+                        </div>
+	                    
+	                    <div>
+	                    	<button class="btn btn-primary btn-lg text-white submit-button" type="submit">Generar</button>
+	               		</div>
+	                </form>
+	                <form action="saveVoucher" th:action="@{/saveVoucher}" class="custom-form" id="saveForm">
+	                <span th:if="${session.voucher!= null}">
+	            		<label th:text="${session.voucher.codigo}"></label>
+	            		<label th:text="${session.voucher.folio}"></label>
+	            		<label th:text="${session.voucher.productoId.nombre}"></label>
+	            		<label th:text="${session.voucher.tipovoucherId.nombre}"></label>
+	            		<button class="btn" type="submit">Guardar</button>
+	            	</span>
+	            	</form>
+                	 
+                </div>
+                <div class="col-sm-9 col-md-6 text-center columna2-verVoucher"><i class="icon ion-android-time float-none" style="font-size: 52px;width: 84px;height: 6px;"></i>
+                    <h3 class="text-center name" style="font-size: 20px;">Verificar Estado Voucher</h3>
+                    <div style="margin-bottom: 18px;">
+                    	<form action="estadoVoucher" th:action="@{/estadoVoucher}" th:object="${voucher}" method="post">
+                    	<div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+		    				<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>    
+					 	</div>
+                    		<input type="text" th:field="*{codigo}" />
+                    		<button class="btn" role="submit">Verificar</button>
+                    	</form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script src="assets/js/script.min.js"></script>
+</body> 
+
+</html>
